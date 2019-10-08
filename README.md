@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/firass115/DASHINGF.svg?branch=master)](https://travis-ci.org/firass115/DASHINGF)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9972838c51c441518422e19c00b6e75c)](https://www.codacy.com/manual/firass115/DASHINGF?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=firass115/DASHINGF&amp;utm_campaign=Badge_Grade)
+
 # DASHINGF
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.

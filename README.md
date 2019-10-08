@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/firass115/DASHINGF.svg?branch=docs%2Fbadgetravis)](https://travis-ci.org/firass115/DASHINGF)
+
 # DASHINGF
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.

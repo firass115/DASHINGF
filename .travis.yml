@@ -33,5 +33,6 @@ deploy:
   keep_history: true
   local-dir: gh-pages
   on:
-    branch: master
-    branch: feat/gh-pages-with-travis
+    branches:    # ← new!
+      only:      # ← new!
+        - master # ← new!

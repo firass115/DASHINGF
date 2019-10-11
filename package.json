@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:gh-pages:demo1":"ng build --configuration=demo1 --outputPath=gh-pages/demo1/ --baseHref=/dashingf/demo1/"
   },
   "husky": {
     "hooks": {

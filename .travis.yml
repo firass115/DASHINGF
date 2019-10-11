@@ -22,3 +22,15 @@ install:
 script:
   - npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
   - npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js
+
+after_success:
+  - npm run build:gh-pages:demo1
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
+    branch: feat/gh-pages-with-travis

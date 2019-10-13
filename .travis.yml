@@ -3,7 +3,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "10"
+  - '10'
 
 addons:
   apt:
@@ -14,7 +14,7 @@ addons:
 
 cache:
   directories:
-     - ./node_modules
+    - ./node_modules
 
 install:
   - npm install
@@ -29,10 +29,10 @@ after_success:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   keep_history: true
   local-dir: gh-pages
   on:
-    branches:    # ← new!
-      only:      # ← new!
+    branches: # ← new!
+      only: # ← new!
         - master # ← new!

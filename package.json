@@ -8,11 +8,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:gh-pages:demo1":"ng build --configuration=demo1 --outputPath=gh-pages/demo1/ --baseHref=/DASHINGF/demo1/"
+    "pretty-quick": "pretty-quick",
+    "build:gh-pages:demo1": "ng build --configuration=demo1 --outputPath=gh-pages/demo1/ --baseHref=/DASHINGF/demo1/"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
+      "pre-commit": "pretty-quick --staged && npm run lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -26,6 +27,8 @@
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "bootstrap": "^4.3.1",
+    "bourbon": "^6.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -49,6 +52,8 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^2.0.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",

@@ -1,31 +1,33 @@
-    /*
+/*
     Flaticon icon font: Flaticon
     Creation date: 18/10/2019 22:06
     */
 
-    @font-face {
-  font-family: "Flaticon";
-  src: url("../assets/fonts/flaticon/Flaticon.woff") format("woff");
+@font-face {
+  font-family: 'Flaticon';
+  src: url('../assets/fonts/flaticon/Flaticon.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-
-.fi:before{
+.fi:before {
   display: inline-block;
-font-family: "Flaticon";
-font-style: normal;
-font-weight: normal;
-font-variant: normal;
-line-height: 1;
-text-decoration: inherit;
-text-rendering: optimizeLegibility;
-text-transform: none;
--moz-osx-font-smoothing: grayscale;
--webkit-font-smoothing: antialiased;
-font-smoothing: antialiased;
+  font-family: 'Flaticon';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
-.flaticon-settings:before { content: "\f100"; }
-.flaticon-logout:before { content: "\f101"; }
-
+.flaticon-settings:before {
+  content: '\f100';
+}
+.flaticon-logout:before {
+  content: '\f101';
+}

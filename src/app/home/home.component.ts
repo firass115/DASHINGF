@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class HomeComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router:Router) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  onLogout(){
+  onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
   }

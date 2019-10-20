@@ -8,39 +8,34 @@ import { ToastrService } from 'ngx-toastr';
   styles: []
 })
 export class RegistrationComponent implements OnInit {
+  constructor(public userservice: UserService, private toastr: ToastrService) {}
 
-  constructor(public userservice:UserService,private toastr: ToastrService) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  
-  onSubmit()
-  {
+  onSubmit() {
     this.userservice.register().subscribe(
-      (res:any) =>{
-        if(res.succeeded)
-        {
-           this.userservice.formModel.reset();
-           this.toastr.success('New user created!', 'Registration successful');
-        }
-        else
-        {
+      (res: any) => {
+        if (res.succeeded) {
+          this.userservice.formModel.reset();
+          this.toastr.success('New user created!', 'Registration successful');
+        } else {
           res.errors.forEach(element => {
-              switch(element.code)
-              {
-                case 'DuplicateUserName':
-                    this.toastr.error('User name is already taken', 'Registration failed');
-                  break;
-                default:
-                    this.toastr.error(element.description, 'Registration failed');
-                  break;
-              }
+            switch (element.code) {
+              case 'DuplicateUserName':
+                this.toastr.error(
+                  'User name is already taken',
+                  'Registration failed'
+                );
+                break;
+              default:
+                this.toastr.error(element.description, 'Registration failed');
+                break;
+            }
           });
         }
       },
-      err =>{
-        console.log(err)
+      err => {
+        console.log(err);
       }
     );
   }

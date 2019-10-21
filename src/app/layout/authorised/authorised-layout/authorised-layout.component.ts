@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-authorised-layout',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class AuthorisedLayoutComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public service: UserService) {}
 
   ngOnInit() {}
 

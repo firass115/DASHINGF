@@ -16,6 +16,8 @@ import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.c
 import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout/authorised-layout.component';
 import { DetailProfileComponent } from './pages/profile/detail-profile/detail-profile.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     PageContentComponent,
     GuestLayoutComponent,
     AuthorisedLayoutComponent,
-    DetailProfileComponent
+    DetailProfileComponent,
+    UserManagementComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { DetailProfileComponent } from './pages/profile/detail-profile/detail-profile.component';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -28,7 +30,14 @@ const routes: Routes = [
         path: 'profile/detail',
         component: DetailProfileComponent,
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: 'usermanagement',
+        component: UserManagementComponent,
+        canActivate: [AuthGuard],
+        data: { permittedRoles: ['Admin'] }
+      },
+      { path: 'forbidden', component: ForbiddenComponent }
     ]
   }
 ];

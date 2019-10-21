@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -14,6 +14,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { PageContentComponent } from './layout/page-content/page-content.component';
 import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.component';
 import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout/authorised-layout.component';
+import { DetailProfileComponent } from './pages/profile/detail-profile/detail-profile.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout
     HomeComponent,
     PageContentComponent,
     GuestLayoutComponent,
-    AuthorisedLayoutComponent
+    AuthorisedLayoutComponent,
+    DetailProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,14 @@ import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout
     ToastrModule.forRoot({ progressBar: true }), // ToastrModule added
     FormsModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

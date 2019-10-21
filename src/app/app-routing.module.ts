@@ -7,6 +7,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth/auth.guard';
+import { DetailProfileComponent } from './pages/profile/detail-profile/detail-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -22,7 +23,12 @@ const routes: Routes = [
     path: '',
     component: AuthorisedLayoutComponent,
     children: [
-      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      {
+        path: 'profile/detail',
+        component: DetailProfileComponent,
+        canActivate: [AuthGuard]
+      }
     ]
   }
 ];

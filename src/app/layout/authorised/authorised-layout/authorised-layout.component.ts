@@ -15,4 +15,8 @@ export class AuthorisedLayoutComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
   }
+
+  onProfile() {
+    this.router.navigate(['/profile/detail']);
+  }
 }

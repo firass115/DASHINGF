@@ -22,12 +22,14 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/sass/styles.scss",
-              "./node_modules/ngx-toastr/toastr.css"
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/assets/styles/bootstrap-select.min.css"
             ],
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/scripts/bootstrap-select.min.js"
             ]
           },
           "configurations": {
@@ -118,12 +120,14 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/sass/styles.scss",
-              "./node_modules/ngx-toastr/toastr.css"
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/assets/styles/bootstrap-select.min.css"
             ],
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/scripts/bootstrap-select.min.js"
             ]
           }
         },

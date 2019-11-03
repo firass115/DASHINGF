@@ -3,21 +3,27 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 
+import { EqualValidator } from './shared/directives/equal-validator.directive';
+
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
-import { UserService } from './shared/user.service';
+import { UserService } from './shared/services/user.service';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PageContentComponent } from './layout/page-content/page-content.component';
 import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.component';
 import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout/authorised-layout.component';
-import { DetailProfileComponent } from './pages/profile/detail-profile/detail-profile.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { UserManagementComponent } from './pages/user-management/user-management.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { UserInfoComponent } from './pages/controls/user-info/user-info.component';
+import { UsersManagementComponent } from './pages/controls/users-management/users-management.component';
+import { BootstrapSelectDirective } from './shared/directives/bootstrap-select.directive';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 @NgModule({
   declarations: [
@@ -28,9 +34,12 @@ import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
     PageContentComponent,
     GuestLayoutComponent,
     AuthorisedLayoutComponent,
-    DetailProfileComponent,
-    UserManagementComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    SettingsComponent,
+    UserInfoComponent,
+    EqualValidator,
+    UsersManagementComponent,
+    BootstrapSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -39,7 +48,11 @@ import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({ progressBar: true }), // ToastrModule added
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    })
   ],
   providers: [
     UserService,

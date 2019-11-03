@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/models/user.model';
+import { UserEdit } from 'src/app/models/user-edit.model';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,15 +46,47 @@ export class UserService {
       FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password
     };
-    return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
+    return this.http.post(this.BaseURI + '/Account/Register', body);
   }
 
   login(formData) {
-    return this.http.post(this.BaseURI + '/ApplicationUser/Login', formData);
+    return this.http.post(this.BaseURI + '/Account/Login', formData);
   }
 
-  getDetailProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
+  getUser() {
+    return this.http.get<User>(this.BaseURI + '/Account/users/me');
+  }
+
+  updateUser(user: UserEdit, userId?: string) {
+    const body = {
+      UserName: user.userName,
+      Email: user.email,
+      FullName: user.fullName,
+      CurrentPassword: user.currentPassword,
+      NewPassword: user.newPassword,
+      Roles: user.roles
+    };
+    const URI = userId
+      ? this.BaseURI + '/Account/users/' + userId
+      : this.BaseURI + '/Account/users/me';
+    return this.http.put(URI, body);
+  }
+
+  getUsersAndRoles(page?: number, pageSize?: number) {
+    return forkJoin(
+      this.http.get(
+        this.BaseURI +
+          '/Account/users/' +
+          page.toString() +
+          '/' +
+          pageSize.toString()
+      ),
+      this.http.get(this.BaseURI + '/Account/roles/')
+    );
+  }
+
+  deleteuser(userId: string) {
+    return this.http.delete(this.BaseURI + '/Account/users/' + userId);
   }
 
   roleMatch(allowedRoles): boolean {
@@ -59,9 +94,9 @@ export class UserService {
     const payLoad = JSON.parse(
       window.atob(localStorage.getItem('token').split('.')[1])
     );
-    const userRole = payLoad.role;
+    const userRole = payLoad.role.split(',');
     allowedRoles.forEach(element => {
-      if (userRole === element) {
+      if (userRole.indexOf(element) > -1) {
         isMatch = true;
         return false;
       }

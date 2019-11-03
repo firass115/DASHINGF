@@ -1,0 +1,344 @@
+<form class="form-horizontal" #f="ngForm" (ngSubmit)="save()">
+  <div class="card border-success mb-3">
+    <div class="card-header ">
+      {{ user.userName }}
+    </div>
+    <div class="card-body">
+      <div class="form-group row">
+        <label class="col-sm-2 offset-sm-1  col-form-label" for="username"
+          >User name
+        </label>
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p class="form-control-plaintext">{{ user.userName }}</p>
+          </div>
+          <div *ngIf="isEditMode">
+            <input
+              class="form-control"
+              id="username"
+              name="UserName"
+              type="text"
+              [(ngModel)]="userEdit.userName"
+              #userName="ngModel"
+              [ngClass]="{
+                'is-valid': f.submitted && userName.valid,
+                'is-invalid': f.submitted && !userName.valid
+              }"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span
+              *ngIf="showValidationErrors && f.submitted && !userName.valid"
+              class="invalid-feedback"
+            >
+              User name is mandatory
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 offset-sm-1  col-form-label" for="fullname"
+          >Full name</label
+        >
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p class="form-control-plaintext">{{ user.fullName }}</p>
+          </div>
+          <div *ngIf="isEditMode">
+            <input
+              class="form-control"
+              id="fullname"
+              name="fullname"
+              type="text"
+              [(ngModel)]="userEdit.fullName"
+              #fullName="ngModel"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isGeneralEditor" class="form-group row">
+        <label class="col-sm-2 offset-sm-1 col-form-label" for="roles-user-info"
+          >Roles</label
+        >
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p ngPreserveWhitespaces class="form-control-plaintext">
+              <span *ngFor="let role of user.roles">
+                <span class="badge badge-pill badge-secondary">{{ role }}</span>
+              </span>
+            </p>
+          </div>
+
+          <div *ngIf="isEditMode">
+            <div
+              [ngStyle]="{
+                border:
+                  showValidationErrors && f.submitted && !roles.valid
+                    ? '1px solid #dc3545'
+                    : '1px solid #ced4da'
+              }"
+            >
+              <select
+                id="roles-user-info"
+                name="roles"
+                [(ngModel)]="userEdit.roles"
+                #roles="ngModel"
+                #rolesSelector="bootstrap-select"
+                class="selectpicker form-control left-status"
+                bootstrapSelect
+                required
+                multiple
+                data-live-search="true"
+                data-actions-box="false"
+                data-live-search-placeholder="Search..."
+                title="Select Roles"
+              >
+                <option
+                  *ngFor="let role of allRoles"
+                  class="badge badge-pill badge-secondary"
+                >
+                  {{ role.name }}
+                </option>
+              </select>
+            </div>
+            <span
+              *ngIf="showValidationErrors && f.submitted && !roles.valid"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              RoleRequired
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 offset-sm-1 col-form-label" for="email"
+          >Email</label
+        >
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p class="form-control-plaintext">{{ user.email }}</p>
+          </div>
+          <div *ngIf="isEditMode">
+            <input
+              class="form-control"
+              id="email"
+              name="email"
+              type="text"
+              [(ngModel)]="userEdit.email"
+              #email="ngModel"
+              required
+              maxlength="200"
+              pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+              [ngClass]="{
+                'is-valid': f.submitted && email.valid,
+                'is-invalid': f.submitted && !email.valid
+              }"
+            />
+            <span
+              *ngIf="
+                showValidationErrors && f.submitted && email.errors?.required
+              "
+              class="invalid-feedback"
+            >
+              Email is mandatory
+            </span>
+            <span
+              *ngIf="
+                showValidationErrors && f.submitted && email.errors?.pattern
+              "
+              class="invalid-feedback"
+            >
+              Email is invalid
+            </span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isEditMode && !isGeneralEditor" class="form-group row">
+        <label for="newPassword" class="col-sm-2 offset-sm-1  col-form-label"
+          >Password</label
+        >
+        <div *ngIf="!isChangePassword" class="col-sm-8">
+          <button type="button" (click)="changePassword()" class="btn btn-link">
+            Change password
+          </button>
+        </div>
+        <div *ngIf="isChangePassword" class="col-sm-8">
+          <div class="password-well card card-body bg-light">
+            <div class="form-group row has-feedback-icon">
+              <label class="col-form-label col-sm-4" for="currentPassword"
+                >Current password</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="password"
+                  name="currentPassword"
+                  placeholder="Enter current password"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-valid': f.submitted && currentPassword.valid,
+                    'is-invalid': f.submitted && !currentPassword.valid
+                  }"
+                  [(ngModel)]="userEdit.currentPassword"
+                  #currentPassword="ngModel"
+                  required
+                />
+                <span
+                  *ngIf="
+                    showValidationErrors &&
+                    f.submitted &&
+                    !currentPassword.valid
+                  "
+                  class="invalid-feedback"
+                >
+                  Current password is mandatory
+                </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <hr class="password-separator-hr" />
+              </div>
+            </div>
+
+            <div class="form-group row has-feedback-icon">
+              <label class="col-form-label col-sm-4" for="newPassword"
+                >New password</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="password"
+                  name="newPassword"
+                  placeholder="Enter new password"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-valid': f.submitted && newPassword.valid,
+                    'is-invalid': f.submitted && !newPassword.valid
+                  }"
+                  [(ngModel)]="userEdit.newPassword"
+                  #newPassword="ngModel"
+                  required
+                  minlength="4"
+                  validateEqual="confirmPassword"
+                  reverse="true"
+                />
+                <span
+                  *ngIf="
+                    showValidationErrors &&
+                    f.submitted &&
+                    newPassword.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  New password is mandatory
+                </span>
+                <span
+                  *ngIf="
+                    showValidationErrors &&
+                    f.submitted &&
+                    newPassword.errors?.minlength
+                  "
+                  class="invalid-feedback"
+                >
+                  Min 4 characters required
+                </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <hr class="password-separator-hr" />
+              </div>
+            </div>
+
+            <div class="form-group row has-feedback-icon">
+              <label class="col-form-label col-sm-4" for="confirmPassword"
+                >Confirm password</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm new password"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-valid': f.submitted && confirmPassword.valid,
+                    'is-invalid': f.submitted && !confirmPassword.valid
+                  }"
+                  [(ngModel)]="userEdit.confirmPassword"
+                  #confirmPassword="ngModel"
+                  required
+                  validateEqual="newPassword"
+                />
+                <span
+                  *ngIf="
+                    showValidationErrors &&
+                    f.submitted &&
+                    confirmPassword.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  Confirmation password is mandatory
+                </span>
+                <span
+                  *ngIf="
+                    showValidationErrors &&
+                    f.submitted &&
+                    confirmPassword.errors?.validateEqual &&
+                    !confirmPassword.errors?.required
+                  "
+                  class="invalid-feedback"
+                >
+                  PasswordMismatch
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="float-right">
+        <button
+          *ngIf="!isEditMode"
+          class="btn btn-success btn-primary"
+          (click)="edit()"
+        >
+          <i class="fa fa-edit"></i> Edit
+        </button>
+        <button
+          *ngIf="!isEditMode && isGeneralEditor"
+          class="btn btn-danger btn-primary"
+          mwlConfirmationPopover
+          popoverTitle="Delete"
+          popoverMessage="Are you sure you want to delete this user ?"
+          (confirm)="delete()"
+          cancelButtonType="success"
+        >
+          <i class="fa fa-trash-o"></i>Delete
+        </button>
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          (click)="cancel()"
+          class="btn btn-danger"
+          [disabled]="isSaving"
+        >
+          <i class="fa fa-times"></i> Cancel
+        </button>
+        <button
+          *ngIf="isEditMode"
+          type="submit"
+          class="btn btn-success btn-primary"
+          [disabled]="isSaving"
+        >
+          <i *ngIf="!isSaving" class="fa fa-save"></i>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

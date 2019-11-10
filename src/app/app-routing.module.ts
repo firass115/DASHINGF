@@ -7,9 +7,12 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth/auth.guard';
-import { DetailProfileComponent } from './pages/profile/detail-profile/detail-profile.component';
-import { UserManagementComponent } from './pages/user-management/user-management.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { UserInfoComponent } from './pages/controls/user-info/user-info.component';
+import { UsersManagementComponent } from './pages/controls/users-management/users-management.component';
+import { RolesManagementComponent } from './pages/controls/roles-management/roles-management.component';
+import { RoleEditorComponent } from './pages/controls/role-editor/role-editor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -26,18 +29,43 @@ const routes: Routes = [
     component: AuthorisedLayoutComponent,
     children: [
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'forbidden', component: ForbiddenComponent },
       {
-        path: 'profile/detail',
-        component: DetailProfileComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'usermanagement',
-        component: UserManagementComponent,
+        path: 'settings',
+        component: SettingsComponent,
         canActivate: [AuthGuard],
-        data: { permittedRoles: ['Admin'] }
-      },
-      { path: 'forbidden', component: ForbiddenComponent }
+        children: [
+          {
+            path: 'profile',
+            component: UserInfoComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'users',
+            component: UsersManagementComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          },
+          {
+            path: 'roles',
+            component: RolesManagementComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          },
+          {
+            path: 'editRole/:id',
+            component: RoleEditorComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          },
+          {
+            path: 'editRole',
+            component: RoleEditorComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          }
+        ]
+      }
     ]
   }
 ];

@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/shared/user.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 
 @Component({
   selector: 'app-authorised-layout',
   templateUrl: './authorised-layout.component.html',
-  styles: []
+  styleUrls: ['./authorised-layout.component.scss']
 })
 export class AuthorisedLayoutComponent implements OnInit {
-  constructor(private router: Router, public service: UserService) {}
+  constructor(private router: Router, public service: AccountService) {}
+
+  tab = 'home';
+  role: string;
 
   ngOnInit() {}
 
@@ -19,5 +22,9 @@ export class AuthorisedLayoutComponent implements OnInit {
 
   onProfile() {
     this.router.navigate(['/profile/detail']);
+  }
+
+  onClick(tabselected) {
+    this.tab = tabselected;
   }
 }

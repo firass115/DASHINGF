@@ -1,16 +1,12 @@
-<form
-  [formGroup]="userservice.formModel"
-  autocomplete="off"
-  (submit)="onSubmit()"
->
+<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
   <div class="form-group required">
     <label>User name</label>
     <input class="form-control" formControlName="UserName" />
     <label
       class="text-danger"
       *ngIf="
-        userservice.formModel.get('UserName').touched &&
-        userservice.formModel.get('UserName').errors?.required
+        service.formModel.get('UserName').touched &&
+        service.formModel.get('UserName').errors?.required
       "
       >This field is mandatory</label
     >
@@ -21,8 +17,8 @@
     <label
       class="text-danger"
       *ngIf="
-        userservice.formModel.get('Email').touched &&
-        userservice.formModel.get('Email').errors?.email
+        service.formModel.get('Email').touched &&
+        service.formModel.get('Email').errors?.email
       "
       >Invalid email address</label
     >
@@ -38,16 +34,16 @@
       <label
         class="text-danger"
         *ngIf="
-          userservice.formModel.get('Passwords.Password').touched &&
-          userservice.formModel.get('Passwords.Password').errors?.required
+          service.formModel.get('Passwords.Password').touched &&
+          service.formModel.get('Passwords.Password').errors?.required
         "
         >This field is mandatory</label
       >
       <label
         class="text-danger"
         *ngIf="
-          userservice.formModel.get('Passwords.Password').touched &&
-          userservice.formModel.get('Passwords.Password').errors?.minlength
+          service.formModel.get('Passwords.Password').touched &&
+          service.formModel.get('Passwords.Password').errors?.minlength
         "
         >Min 4 characters required</label
       >
@@ -62,17 +58,16 @@
       <label
         class="text-danger"
         *ngIf="
-          userservice.formModel.get('Passwords.ConfirmPassword').touched &&
-          userservice.formModel.get('Passwords.ConfirmPassword').errors
-            ?.required
+          service.formModel.get('Passwords.ConfirmPassword').touched &&
+          service.formModel.get('Passwords.ConfirmPassword').errors?.required
         "
         >This field is mandatory</label
       >
       <label
         class="text-danger"
         *ngIf="
-          userservice.formModel.get('Passwords.ConfirmPassword').touched &&
-          userservice.formModel.get('Passwords.ConfirmPassword').errors
+          service.formModel.get('Passwords.ConfirmPassword').touched &&
+          service.formModel.get('Passwords.ConfirmPassword').errors
             ?.passwordMismatch
         "
         >Confirm password does not match</label
@@ -83,7 +78,7 @@
     <button
       type="submit"
       class="btn btn-success btn-primary btn-block"
-      [disabled]="!userservice.formModel.valid"
+      [disabled]="!service.formModel.valid"
     >
       Register
     </button>

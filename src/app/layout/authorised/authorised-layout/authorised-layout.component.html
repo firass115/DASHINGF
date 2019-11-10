@@ -1,9 +1,6 @@
-<div
-  style="width: 950px; 
-margin: 0 auto; "
->
+<div style="width: 950px; margin: 0 auto; ">
   <nav class="mb-1 navbar navbar-expand-lg navbar-default">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand">FD</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -22,7 +19,7 @@ margin: 0 auto; "
           [ngClass]="{ active: tab === 'home' }"
           (click)="onClick('home')"
         >
-          <a class="nav-link" href="#"
+          <a class="nav-link" routerLink="/home"
             >Home
             <span class="sr-only">(current)</span>
           </a>
@@ -53,6 +50,12 @@ margin: 0 auto; "
               routerLink="/settings/users"
               *ngIf="service.roleMatch(['Admin'])"
               >Users</a
+            >
+            <a
+              class="dropdown-item"
+              routerLink="/settings/roles"
+              *ngIf="service.roleMatch(['Admin'])"
+              >Roles</a
             >
           </div>
         </li>

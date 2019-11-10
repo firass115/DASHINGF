@@ -11,6 +11,8 @@ import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { UserInfoComponent } from './pages/controls/user-info/user-info.component';
 import { UsersManagementComponent } from './pages/controls/users-management/users-management.component';
+import { RolesManagementComponent } from './pages/controls/roles-management/roles-management.component';
+import { RoleEditorComponent } from './pages/controls/role-editor/role-editor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -41,6 +43,24 @@ const routes: Routes = [
           {
             path: 'users',
             component: UsersManagementComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          },
+          {
+            path: 'roles',
+            component: RolesManagementComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          },
+          {
+            path: 'editRole/:id',
+            component: RoleEditorComponent,
+            canActivate: [AuthGuard],
+            data: { permittedRoles: ['Admin'] }
+          },
+          {
+            path: 'editRole',
+            component: RoleEditorComponent,
             canActivate: [AuthGuard],
             data: { permittedRoles: ['Admin'] }
           }

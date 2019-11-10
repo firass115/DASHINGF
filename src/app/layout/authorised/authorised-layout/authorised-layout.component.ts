@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/shared/services/user.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 
 @Component({
   selector: 'app-authorised-layout',
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./authorised-Layout.Component.scss']
 })
 export class AuthorisedLayoutComponent implements OnInit {
-  constructor(private router: Router, public service: UserService) {}
+  constructor(private router: Router, public service: AccountService) {}
 
   tab = 'home';
   role: string;

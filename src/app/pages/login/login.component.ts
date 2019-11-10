@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     Password: ''
   };
   constructor(
-    private service: UserService,
+    private service: AccountService,
     private router: Router,
     private toastr: ToastrService
   ) {}

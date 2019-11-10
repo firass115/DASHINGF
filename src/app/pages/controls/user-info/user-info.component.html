@@ -312,11 +312,7 @@
         <button
           *ngIf="!isEditMode && isGeneralEditor"
           class="btn btn-danger btn-primary"
-          mwlConfirmationPopover
-          popoverTitle="Delete"
-          popoverMessage="Are you sure you want to delete this user ?"
-          (confirm)="delete()"
-          cancelButtonType="success"
+          (click)="delete()"
         >
           <i class="fa fa-trash-o"></i>Delete
         </button>

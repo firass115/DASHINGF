@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ViewChild
 } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 import { User } from 'src/app/models/user.model';
 import { UserEdit } from 'src/app/models/user-edit.model';
 import { NgForm } from '@angular/forms';
@@ -33,10 +33,8 @@ export class UserInfoComponent implements OnInit {
   public isSaving = false;
   public isChangePassword = false;
   public showValidationErrors = false;
-  public confirmClicked = false;
-  public cancelClicked = false;
 
-  constructor(private service: UserService, private toastr: ToastrService) {}
+  constructor(private service: AccountService, private toastr: ToastrService) {}
 
   ngOnInit() {
     if (!this.isGeneralEditor) {
@@ -44,7 +42,11 @@ export class UserInfoComponent implements OnInit {
         .getUser()
         .subscribe(
           user => (this.user = user),
-          error => console.log('Unable to retrieve user data from the server')
+          error =>
+            this.toastr.error(
+              'Unable to retrieve user data from the server',
+              'Load failed'
+            )
         );
     } else {
       this.user = this.curuser;
@@ -60,23 +62,19 @@ export class UserInfoComponent implements OnInit {
   }
 
   delete() {
-    this.service.deleteuser(this.user.id).subscribe(
-      (res: any) => {
-        if (res.succeeded) {
+    if (confirm('Are you sure you want to delete this user ?')) {
+      this.service.deleteuser(this.user.id).subscribe(
+        res => {
           this.toastr.success('User is deleted!', 'Delete successful');
           this.notify.emit(this.page);
-        } else {
-          res.errors.forEach(element => {
-            this.toastr.error(element.description, 'Delete failed');
-          });
-        }
-      },
-      error =>
-        this.toastr.error(
-          error.error ? error.error : error.message,
-          'Delete failed'
-        )
-    );
+        },
+        error =>
+          this.toastr.error(
+            error.error ? error.error : error.message,
+            'Delete failed'
+          )
+      );
+    }
   }
 
   cancel() {
@@ -95,27 +93,15 @@ export class UserInfoComponent implements OnInit {
 
     if (!this.isGeneralEditor) {
       this.service.updateUser(this.userEdit).subscribe(
-        (res: any) => {
-          if (res.succeeded) {
-            this.saveSuccessHelper();
-          } else {
-            res.errors.forEach(element => {
-              this.toastr.error(element.description, 'Save failed');
-            });
-          }
+        res => {
+          this.saveSuccessHelper();
         },
         error => this.saveFailedHelper(error)
       );
     } else {
       this.service.updateUser(this.userEdit, this.userEdit.id).subscribe(
-        (res: any) => {
-          if (res.succeeded) {
-            this.saveSuccessHelper();
-          } else {
-            res.errors.forEach(element => {
-              this.toastr.error(element.description, 'Save failed');
-            });
-          }
+        res => {
+          this.saveSuccessHelper();
         },
         error => this.saveFailedHelper(error)
       );
@@ -138,7 +124,7 @@ export class UserInfoComponent implements OnInit {
     Object.assign(this.user, this.userEdit);
     this.userEdit = new UserEdit();
     this.form.resetForm();
-    this.toastr.success('Your profile is updated!', 'Save successful');
+    this.toastr.success('User is updated!', 'Save successful');
   }
 
   private saveFailedHelper(error: HttpErrorResponse) {

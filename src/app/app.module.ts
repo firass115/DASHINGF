@@ -11,7 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
-import { UserService } from './shared/services/user.service';
+import { AccountService } from './shared/services/account.service';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PageContentComponent } from './layout/page-content/page-content.component';
@@ -24,6 +24,8 @@ import { UserInfoComponent } from './pages/controls/user-info/user-info.componen
 import { UsersManagementComponent } from './pages/controls/users-management/users-management.component';
 import { BootstrapSelectDirective } from './shared/directives/bootstrap-select.directive';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { RolesManagementComponent } from './pages/controls/roles-management/roles-management.component';
+import { RoleEditorComponent } from './pages/controls/role-editor/role-editor.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     UserInfoComponent,
     EqualValidator,
     UsersManagementComponent,
-    BootstrapSelectDirective
+    BootstrapSelectDirective,
+    RolesManagementComponent,
+    RoleEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     })
   ],
   providers: [
-    UserService,
+    AccountService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

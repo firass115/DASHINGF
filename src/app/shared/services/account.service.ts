@@ -4,13 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user.model';
 import { UserEdit } from 'src/app/models/user-edit.model';
 import { forkJoin } from 'rxjs';
+import { Role } from 'src/app/models/role.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AccountService {
   constructor(private fb: FormBuilder, private http: HttpClient) {}
-  readonly BaseURI = 'http://localhost:54365/api';
+  readonly BaseURI = environment.baseUrl;
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -70,6 +72,33 @@ export class UserService {
       ? this.BaseURI + '/Account/users/' + userId
       : this.BaseURI + '/Account/users/me';
     return this.http.put(URI, body);
+  }
+
+  getRoles() {
+    return this.http.get(this.BaseURI + '/Account/roles/');
+  }
+
+  getRole(id: string) {
+    return this.http.get<Role>(this.BaseURI + '/Account/roles/' + id);
+  }
+
+  updateRole(role: Role, roleId: string) {
+    const body = {
+      Name: role.name
+    };
+
+    return this.http.put(this.BaseURI + '/Account/roles/' + roleId, body);
+  }
+
+  deleteRole(roleId: string) {
+    return this.http.delete(this.BaseURI + '/Account/roles/' + roleId);
+  }
+
+  createRole(role: Role) {
+    const body = {
+      Name: role.name
+    };
+    return this.http.post(this.BaseURI + '/Account/roles', body);
   }
 
   getUsersAndRoles(page?: number, pageSize?: number) {

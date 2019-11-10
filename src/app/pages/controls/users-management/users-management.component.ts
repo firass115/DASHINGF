@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
+import { AccountService } from 'src/app/shared/services/account.service';
 import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class UsersManagementComponent implements OnInit {
   pagesize = 3;
   allRoles: Observable<Role[]>;
 
-  constructor(private service: UserService) {}
+  constructor(private service: AccountService) {}
 
   ngOnInit() {
     this.getPage(1);

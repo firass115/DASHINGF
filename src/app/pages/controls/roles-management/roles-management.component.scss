@@ -1,0 +1,21 @@
+.col-4,
+.col-2 {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+  height: 30px;
+}
+
+.col-4.header,
+.col-2.header {
+  color: #212529;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.container-fluid {
+  border-radius: 0.25rem;
+}
+
+.container-fluid.border-success {
+  border-color: #28a745 !important;
+  border: 1px solid;
+}

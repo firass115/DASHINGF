@@ -5,7 +5,7 @@ import { AccountService } from 'src/app/shared/services/account.service';
 @Component({
   selector: 'app-authorised-layout',
   templateUrl: './authorised-layout.component.html',
-  styleUrls: ['./authorised-Layout.component.scss']
+  styleUrls: ['./authorised-layout.component.scss']
 })
 export class AuthorisedLayoutComponent implements OnInit {
   constructor(private router: Router, public service: AccountService) {}

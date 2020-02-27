@@ -1,0 +1,166 @@
+<form class="form-horizontal" #f="ngForm" (ngSubmit)="save()">
+  <div class="card border-success mb-3">
+    <div class="card-header ">
+      {{ employee.firstName }}
+    </div>
+    <div class="card-body">
+      <div class="form-group row">
+        <label class="col-sm-2 offset-sm-1  col-form-label" for="firstname"
+          >First name
+        </label>
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p class="form-control-plaintext">{{ employee.firstName }}</p>
+          </div>
+          <div *ngIf="isEditMode">
+            <input
+              class="form-control"
+              id="firstname"
+              name="firstname"
+              type="text"
+              [(ngModel)]="employeeEdit.firstName"
+              #firstname="ngModel"
+              [ngClass]="{
+                'is-valid': f.submitted && firstname.valid,
+                'is-invalid': f.submitted && !firstname.valid
+              }"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span
+              *ngIf="showValidationErrors && f.submitted && !firstname.valid"
+              class="invalid-feedback"
+            >
+              First name is mandatory
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 offset-sm-1  col-form-label" for="lastname"
+          >Last name
+        </label>
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p class="form-control-plaintext">{{ employee.lastName }}</p>
+          </div>
+          <div *ngIf="isEditMode">
+            <input
+              class="form-control"
+              id="lastname"
+              name="lastname"
+              type="text"
+              [(ngModel)]="employeeEdit.lastName"
+              #firstname="ngModel"
+              [ngClass]="{
+                'is-valid': f.submitted && lastname.valid,
+                'is-invalid': f.submitted && !lastname.valid
+              }"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span
+              *ngIf="showValidationErrors && f.submitted && !lastname.valid"
+              class="invalid-feedback"
+            >
+              Last name is mandatory
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 offset-sm-1 col-form-label" for="department"
+          >Department</label
+        >
+        <div class="col-sm-8">
+          <div *ngIf="!isEditMode">
+            <p ngPreserveWhitespaces class="form-control-plaintext">
+              <span class="badge badge-pill badge-secondary">{{
+                employee.departmentName
+              }}</span>
+            </p>
+          </div>
+
+          <div *ngIf="isEditMode">
+            <div
+              [ngStyle]="{
+                border:
+                  showValidationErrors && f.submitted && !department.valid
+                    ? '1px solid #dc3545'
+                    : '1px solid #ced4da'
+              }"
+            >
+              <select
+                id="department"
+                name="department"
+                [(ngModel)]="employeeEdit.departmentId"
+                #department="ngModel"
+                #departmentSelector="bootstrap-select"
+                class="selectpicker form-control left-status"
+                bootstrapSelect
+                required
+                data-live-search="true"
+                data-actions-box="false"
+                data-live-search-placeholder="Search..."
+                title="Select Department"
+              >
+                <option
+                  *ngFor="let department of AllDepartments"
+                  class="badge badge-pill badge-secondary"
+                  [value]="department.departmentId"
+                >
+                  {{ department.name }}
+                </option>
+              </select>
+            </div>
+            <span
+              *ngIf="showValidationErrors && f.submitted && !department.valid"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Department Required
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="float-right">
+        <button
+          *ngIf="!isEditMode"
+          class="btn btn-success btn-primary"
+          (click)="edit()"
+        >
+          <i class="fa fa-edit"></i> Edit
+        </button>
+        <button
+          *ngIf="!isEditMode"
+          class="btn btn-danger btn-primary"
+          (click)="delete()"
+        >
+          <i class="fa fa-trash"></i>Delete
+        </button>
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          (click)="cancel()"
+          class="btn btn-danger"
+          [disabled]="isSaving"
+        >
+          <i class="fa fa-times"></i> Cancel
+        </button>
+        <button
+          *ngIf="isEditMode"
+          type="submit"
+          class="btn btn-success btn-primary"
+          [disabled]="isSaving"
+        >
+          <i *ngIf="!isSaving" class="fa fa-save"></i>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

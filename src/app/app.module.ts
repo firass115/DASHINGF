@@ -14,10 +14,12 @@ import { HomeComponent } from './home/home.component';
 import { PageContentComponent } from './layout/page-content/page-content.component';
 import { GuestLayoutComponent } from './layout/guest/guest-layout/guest-layout.component';
 import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout/authorised-layout.component';
-import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthInterceptor } from './shared/services/auth.interceptor';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { SettingsModule } from './settings/settings.module';
 import { AccountModule } from './account/account.module';
+import { DepartmentModule } from './department/department.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AccountModule } from './account/account.module';
     ToastrModule.forRoot({ progressBar: true }), // ToastrModule added
     FormsModule,
     SettingsModule,
-    AccountModule
+    AccountModule,
+    DepartmentModule,
+    EmployeeModule
   ],
   providers: [
     AccountService,

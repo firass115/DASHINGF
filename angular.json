@@ -24,7 +24,8 @@
               "src/sass/styles.scss",
               "./node_modules/font-awesome/css/font-awesome.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "src/assets/styles/bootstrap-select.min.css"
+              "src/assets/styles/bootstrap-select.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",

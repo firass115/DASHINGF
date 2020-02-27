@@ -7,7 +7,7 @@ import { SettingsComponent } from './settings.component';
 import { UserInfoComponent } from './pages/user-info/user-info.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AuthorisedLayoutComponent } from '../layout/authorised/authorised-layout/authorised-layout.component';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../shared/services/auth.guard';
 
 const routes: Routes = [
   {

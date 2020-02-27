@@ -1,5 +1,5 @@
 <div class="card border-success mb-3">
-  <div class="card-header container-fluid">
+  <div class="card-header">
     <div class="row">
       <div class="col-md-10">
         Role list
@@ -12,8 +12,8 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="container-fluid border-success">
-      <div class="row justify-content-center">
+    <div class="container">
+      <div class="row">
         <div class="col-4 header text-center">
           Name
         </div>
@@ -24,7 +24,7 @@
         <div class="col-2 header"></div>
       </div>
       <div class="row" *ngFor="let row of roles">
-        <div class="col-4 justify-content-center">
+        <div class="col-4">
           {{ row.name }}
         </div>
         <div class="col-4">
@@ -37,7 +37,7 @@
         </div>
         <div class="col-2 text-center">
           <a href="javascript:;" (click)="deleteRole(row)">
-            <i class="fa fa-trash-o"></i>
+            <i class="fa fa-trash"></i>
           </a>
         </div>
       </div>

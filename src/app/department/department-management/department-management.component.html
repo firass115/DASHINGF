@@ -1,0 +1,79 @@
+<div class="card border-success mb-3">
+  <div class="card-header container-fluid">
+    <div class="row">
+      <div class="col-md-9">
+        Department list
+      </div>
+      <div class="col-md-3 float-right">
+        <a href="javascript:;" (click)="addDepartmentForm()">
+          <i class="fa fa-plus-circle"></i> New department
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id="DepartContainer" class="container-fluid border-success">
+      <div class="grid-table">
+        <div class="thead">
+          <div class="tr">
+            <div class="td">Name</div>
+            <div class="td">Description</div>
+            <div class="td">Action</div>
+          </div>
+        </div>
+        <div class="tbody">
+          <form
+            class="tr"
+            [formGroup]="fg"
+            *ngFor="let fg of departmentForms.controls; let i = index"
+            (submit)="recordSubmit(fg)"
+          >
+            <div hidden="true">
+              <input formControlName="departmentId" />
+            </div>
+            <div class="td">
+              <input class="form-control" formControlName="name" />
+            </div>
+            <div class="td">
+              <input class="form-control" formControlName="description" />
+            </div>
+            <div class="td">
+              <div class="container">
+                <div class="row">
+                  <div class="col-9">
+                    <button
+                      type="submit"
+                      class="btn"
+                      [disabled]="fg.invalid"
+                      style="display: flex;align-items: center;justify-content: center;"
+                      [ngClass]="
+                        fg.get('departmentId').value == 0
+                          ? 'btn-success btn-primary'
+                          : 'btn-warning'
+                      "
+                    >
+                      <i class="fa fa-save" style="padding: 2px;"></i>
+                      {{
+                        fg.get('departmentId').value == 0 ? 'Submit' : 'Update'
+                      }}
+                    </button>
+                  </div>
+                  <div class="col-3">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      style="margin-left: -20px;"
+                      (click)="onDelete(fg.get('departmentId').value, i)"
+                    >
+                      <i class="far fa-trash-alt text-danger"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

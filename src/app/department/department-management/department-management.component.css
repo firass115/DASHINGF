@@ -1,0 +1,78 @@
+.grid-table {
+  display: table;
+  border-collapse: collapse;
+}
+
+.thead {
+  display: table-header-group;
+  border-bottom: 1px solid black;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.tbody {
+  display: table-row-group;
+}
+
+.tr {
+  display: table-row;
+}
+
+.td {
+  display: table-cell;
+  padding: 10px 10px 10px 5px;
+  width: 40%;
+}
+
+.thead div.tr div.td:last-child {
+  width: 30%;
+}
+
+.thead div.tr:first-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+.elementToFadeInAndOut {
+  -webkit-animation: fadeinout 2s linear forwards;
+  animation: fadeinout 2s linear forwards;
+  opacity: 0;
+}
+
+#DepartContainer.container-fluid {
+  border-radius: 0.25rem;
+  padding: 0;
+}
+
+#DepartContainer.container-fluid.border-success {
+  border-color: #28a745 !important;
+  border: 1px solid;
+}
+
+#outer {
+  width: 100%;
+  text-align: center;
+}
+.inner {
+  display: inline-block;
+}
+
+@-webkit-keyframes fadeinout {
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeinout {
+  50% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,23 @@
+<div class="card border-success mb-3">
+  <div class="card-header container-fluid">
+    <div class="row">
+      <div class="col-md-9">
+        Employee list
+      </div>
+      <div class="col-md-3 float-right">
+        <a href="javascript:;" (click)="addEmployee()">
+          <i class="fa fa-plus-circle"></i> New employee
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="card" *ngFor="let employee of Employees" style="border: none">
+      <employee-editor
+        [curEmployee]="employee"
+        [AllDepartments]="AllDepartments"
+      ></employee-editor>
+    </div>
+  </div>
+  <div class="card-footer"></div>
+</div>

@@ -9,8 +9,7 @@ import { RoleEditorComponent } from './pages/role-editor/role-editor.component';
 import { SettingsComponent } from './settings.component';
 import { UserInfoComponent } from './pages/user-info/user-info.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
-
-import { BootstrapSelectDirective } from '../shared/directives/bootstrap-select.directive';
+import { BootstrapSelectModule } from '../shared/modules/bootstrap-select/bootstrap-select.module';
 
 @NgModule({
   declarations: [
@@ -18,15 +17,15 @@ import { BootstrapSelectDirective } from '../shared/directives/bootstrap-select.
     UserInfoComponent,
     UsersManagementComponent,
     RolesManagementComponent,
-    RoleEditorComponent,
-    BootstrapSelectDirective
+    RoleEditorComponent
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BootstrapSelectModule
   ]
 })
 export class SettingsModule {}

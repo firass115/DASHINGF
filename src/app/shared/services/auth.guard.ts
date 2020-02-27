@@ -7,7 +7,7 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AccountService } from '../shared/services/account.service';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'

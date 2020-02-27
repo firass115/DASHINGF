@@ -6,7 +6,7 @@ import { AuthorisedLayoutComponent } from './layout/authorised/authorised-layout
 import { RegistrationComponent } from './account/pages/registration/registration.component';
 import { LoginComponent } from './account/pages/login/login.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './shared/services/auth.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 const routes: Routes = [
